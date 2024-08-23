@@ -1,0 +1,20 @@
+.container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .text-danger {
+    font-size: 0.875em;
+  }
+  
+  @media (min-width: 700px) {
+    .container{
+        width: 400px;
+    }
+  }

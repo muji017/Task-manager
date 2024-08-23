@@ -1,0 +1,107 @@
+<div class="container mt-4 mb-5 py-4" style="border-radius: 10px; background-color: rgb(255, 255, 255);">
+  <h1>
+    Todo List
+  </h1>
+  <div class="d-flex  flex-column flex-md-row flex-wrap justify-content-between mb-4">
+    <!-- Search Bar -->
+    <div class="d-flex align-items-center mb-3 mb-md-0 position-relative" style="max-width: 300px;">
+      <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+      <input type="search" class="form-control ps-5" placeholder="Search" [(ngModel)]="searchTerm">
+    </div>
+
+    <!-- Filters -->
+    <div class="d-flex flex-wrap gap-3">
+      <div class="mb-3">
+        <label for="filterDate" class="form-label">Filter by Date</label>
+        <input id="filterDate" type="date" class="form-control" [(ngModel)]="filterDate">
+      </div>
+
+      <div class="mb-3">
+        <label for="filterPriority" class="form-label">Filter by Priority</label>
+        <select id="filterPriority" class="form-select " [(ngModel)]="filterPriority">
+          <option value="">All</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="filterStatus" class="form-label">Filter by Status</label>
+        <select id="filterStatus" class="form-select" [(ngModel)]="filterStatus">
+          <option value="">All</option>
+          <option value="true">Completed</option>
+          <option value="false">Incomplete</option>
+        </select>
+      </div>
+
+      <!-- Button create task -->
+      <div class="mb-3">
+        <button class="btn btn-primary" (click)="createTask()"><i class="bi bi-plus"></i> Add Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task List -->
+  <div *ngIf="tasks.length; else noTasks">
+    <div class="justify-content-center row row-cols-1  row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div *ngFor="let task of filteredTasks(); trackBy: trackById" class="col">
+        <div class="card h-100 shadow-sm rounded position-relative">
+          <div class="priority-circle" [ngClass]="{
+            'low': task.priority === 'Low',
+            'medium': task.priority === 'Medium',
+            'high': task.priority === 'High'
+          }">
+            {{ getPriorityLetter(task.priority) }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ task.dateTime | date: 'fullDate' }} - {{ task.dateTime | date: 'shortTime' }}
+            </h6>
+            <div class="description">
+              <p class="card-text">{{task.description}}</p>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                @if(task.completed){
+                Completed
+                }@else {
+                Incompleted
+                } <input type="checkbox" [(ngModel)]="task.completed" (click)="markCompleted(task)"
+                  [disabled]="task.completed" />
+              </div>
+              <div>
+                <button class="btn btn-primary btn-sm me-2" (click)="editTask(task)">
+                  <i class="bi bi-pen"></i> Edit
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="deleteTask(task.id)">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- No Tasks Message -->
+  <ng-template #noTasks>
+    <div class="text-center">
+      <p>No tasks available. Please add some tasks.</p>
+    </div>
+  </ng-template>
+  <div class="mt-4 d-flex justify-content-between align-items-center bg-light rounded p-3 shadow-sm">
+    <div class="text-center">
+      <h6 class="text-muted mb-1">Total Tasks</h6>
+      <div class="fs-4 fw-bold text-primary">{{ totalTasks }}</div>
+    </div>
+    <div class="text-center">
+      <h6 class="text-muted mb-1">Completed Tasks</h6>
+      <div class="fs-4 fw-bold text-success">{{ completedTasks }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container justify-content-center  mt-5">
+    <h2>Create New Task</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <!-- Task Name -->
+        <div class="mb-3 ">
+            <label for="name" class="form-label">Task Name</label>
+            <input type="text" id="name" class="form-control " formControlName="name" />
+            <div *ngIf="isSubmitted && nameError.length>0  " class="text-danger">
+                <small class="text-danger">
+                    {{nameError}}
+                </small>
+            </div>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="mb-3">
+            <label for="dateTime" class="form-label">Date and Time</label>
+            <input type="datetime-local" id="dateTime" class="form-control" formControlName="dateTime" [min]="minDateTime"  />
+            <div *ngIf="isSubmitted " class="text-danger">
+                <small>
+                    {{dateError}}
+                </small>
+            </div>
+        </div>
+
+        <!-- Priority -->
+        <div class="mb-3">
+            <label for="priority" class="form-label">Priority</label>
+            <select id="priority" class="form-select" formControlName="priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" formControlName="description"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Create Task</button>
+    </form>
+</div>

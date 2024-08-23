@@ -1,27 +1,61 @@
-# Frontend
+# Task Management Application
+ 
+ Overview
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+This project is a task management application built with Angular 18 for the frontend and JSON Server for the backend. It allows users to view, add, edit, and delete tasks. The application uses Angular Material Dialog for modals and Bootstrap for styling.
 
-## Development server
+# Backend Setup (JSON Server)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+`Setup`
+Navigate to the Backend Folder
+ create db.json file `{
+  "tasks": [
+    {
+      "id": "2",
+      "name": "Task 2",
+      "dateTime": "2024-08-25T14:00",
+      "priority": "High",
+      "description": "Lorem ipsum, placeholder or dummy text used in typesetting and graphic design for previewing layouts. It features scrambled Latin text, which emphasizes the design over content of the layout. It is the standard placeholder text of the printing and publishing industries.",
+      "completed": true
+    },]}`
+    
+Open your terminal and change to the backend directory where db.json is located.
 
-## Code scaffolding
+cd backend
+Install JSON Server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Start the JSON Server to watch the db.json file and serve data.
+json-server --watch db.json
+By default, JSON Server will be running on `http://localhost:3000`.
 
-## Build
+# Frontend Setup (Angular 18)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+ Angular CLI installed globally.
 
-## Running unit tests
+`Setup`
+Navigate to the Frontend Folder
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Open a new terminal and change to the Angular frontend directory.
 
-## Running end-to-end tests
+cd frontend
+   Install Dependencies
+Install the required npm packages.
+`npm install`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Run Angular Development Server
+Start the Angular development server.
+`ng serve`
+By default, the Angular application will be available at `http://localhost:4200.`
 
-## Further help
+# Application Features
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Dashboard: Displays a list of tasks with options to filter and sort.
+2. Add Task: Opens a dialog to create a new task. The form includes fields for Task Name, Date and Time, Priority, and Description.
+3. Edit Task: Opens a dialog to edit an existing task.
+4. Delete Task: Allows users to delete a task with a confirmation prompt.
+
+# Technologies Used
+
+1. Frontend: Angular 18, Angular Material, Bootstrap
+2. Backend: JSON Server
+3. Angular Services to handle http api calls
